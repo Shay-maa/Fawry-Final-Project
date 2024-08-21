@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-3">
+
+    <app-merchant-sidebar></app-merchant-sidebar>
+  </div>
+  <div class="col-md-9">
+<div class="register ">
+
+       <form [formGroup]="couponForm" class="w-50 m-5 p-5 my-5 rounded-4  border border-info rounded" (ngSubmit)="addCoupon()">
+  <h2 class="text-center m-3" > Create New Coupon</h2>
+
+          <div class="mb-3">
+            <label for="code" class="form-label">Coupon Code</label>
+            <input type="text" class="form-control" id="code" formControlName="code">
+            <div *ngIf="couponForm.get('code')?.invalid && couponForm.get('code')?.touched" class="text-danger">
+              Coupon Code is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="usageCount" class="form-label">Usage Count</label>
+            <input type="number" class="form-control" id="usageCount" formControlName="usageCount">
+            <div *ngIf="couponForm.get('usageCount')?.invalid && couponForm.get('usageCount')?.touched" class="text-danger">
+              Usage Count must be at least 1.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="expireDate" class="form-label">Expiration Date</label>
+            <input type="datetime-local" class="form-control" id="expireDate" formControlName="expireDate">
+            <div *ngIf="couponForm.get('expireDate')?.invalid && couponForm.get('expireDate')?.touched" class="text-danger">
+                Expiration Date is required.
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="percentageType" class="form-label">Select Type</label>
+          <select class="form-control" id="percentageType" formControlName="percentageType">
+              <option value="">Select Type</option>
+              <option value="percentage">Percentage</option>
+              <option value="value">fixed Value</option>
+          </select>
+          <div *ngIf="couponForm.get('percentageType')?.invalid && couponForm.get('percentageType')?.touched" class="text-danger">
+              Selection is required.
+          </div>
+      </div>
+          <div class="mb-3">
+            <label for="percentageValue" class="form-label">Percentage Value</label>
+            <input type="number" class="form-control" id="percentageValue" formControlName="percentageValue">
+            <div *ngIf="couponForm.get('percentageValue')?.invalid && couponForm.get('percentageValue')?.touched" class="text-danger">
+              Percentage Value is required.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="couponForm.invalid">Add Coupon</button>
+        </form>
+
+</div>
+
+</div>

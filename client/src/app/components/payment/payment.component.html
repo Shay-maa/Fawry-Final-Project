@@ -1,0 +1,48 @@
+<div class="container col-md-4 mb-4 center text-center p-5">
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="cardNumber">Card Number</label>
+    <input
+      type="text"
+      id="cardNumber"
+      name="cardNumber"
+      formControlName="cardNumber"
+      required
+      class="form-control"
+      pattern="^[0-9]{16}$"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="cvv">CVV</label>
+    <input
+      type="text"
+      id="cvv"
+      name="cvv"
+      formControlName="cvv"
+      required
+      class="form-control"
+      pattern="^[0-9]{3,4}$"
+    />
+  </div>
+    <div class="form-group">
+    <label for="coupon">Promo code</label>
+    <input
+      type="text"
+      id="coupon"
+      name="coupon"
+      required="false"
+      formControlName="coupon"
+      class="form-control"
+    />
+  </div>
+
+   <hr class="mb-4" />                
+  <button type="submit" class="btn btn-primary" [disabled]="!checkoutForm.valid">
+    Submit Payment
+  </button>
+</form>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>
