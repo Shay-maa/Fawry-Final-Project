@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$USER_HOME$/BankMangementSystem-main/bankmangementsystem.iml" filepath="$USER_HOME$/BankMangementSystem-main/bankmangementsystem.iml" />
+      <module fileurl="file://$USER_HOME$/coupon/coupon.iml" filepath="$USER_HOME$/coupon/coupon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/coupon-api/demo.iml" filepath="$PROJECT_DIR$/coupon-api/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/e-commerce.iml" filepath="$PROJECT_DIR$/e-commerce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-api/notification-api.iml" filepath="$PROJECT_DIR$/notification-api/notification-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-api/order-api.iml" filepath="$PROJECT_DIR$/order-api/order-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/product-api/product-api.iml" filepath="$PROJECT_DIR$/product-api/product-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store-api/servicestoreproject.iml" filepath="$PROJECT_DIR$/store-api/servicestoreproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-api/user-api.iml" filepath="$PROJECT_DIR$/user-api/user-api.iml" />
+    </modules>
+  </component>
+</project>
