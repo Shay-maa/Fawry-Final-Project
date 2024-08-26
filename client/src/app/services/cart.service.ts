@@ -10,8 +10,12 @@ export class CartService {
   constructor(private http: HttpClient) {
   }
   getCartCount() {
-    return JSON.parse(localStorage.getItem('cart')!).length;
-  }
+    let cart =  JSON.parse(localStorage.getItem('cart')!)
+    if(cart == null) {
+    return 0;
+    }else{
+    return cart.length;
+  }}
 
   removeProductFromCart(productId: number, cartId: string): Observable<void> {
     const headers = new HttpHeaders({

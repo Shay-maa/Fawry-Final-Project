@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { NgFor } from '@angular/common';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-show-all-users',
@@ -12,30 +13,29 @@ import { NgFor } from '@angular/common';
   templateUrl: './show-all-users.component.html',
   styleUrl: './show-all-users.component.css'
 })
-export class ShowAllUsersComponent {
-  users: any[] = [
-    {
-      fname: 'John',
-      lname: 'Doe',
-      gender: 'Male',
-      email: 'john@example.com',
-      phone_number: '123-456-7890'
-    },
-    {
-      fname: 'Jane',
-      lname: 'Smith',
-      gender: 'Female',
-      email: 'jane@example.com',
-      phone_number: '987-654-3210'
-    },
-    {
-      fname: 'Alice',
-      lname: 'Johnson',
-      gender: 'Female',
-      email: 'alice@example.com',
-      phone_number: '555-555-5555'
-    }
-    // Add more user objects as needed
-  ];
+export class ShowAllUsersComponent implements OnInit {
 
+  users: any[] = []
+
+  constructor(private userService :UserService){}
+
+  ngOnInit(): void {
+ this.getAllUsers()
+  }
+
+
+
+
+    getAllUsers(){
+      this.userService.getAllUserS().subscribe((res)=>{
+        this.users = res
+      })
+    }
+
+    deletUser(userId:any){
+      this.userService.deleteUser(userId).subscribe((res)=>{
+        this.users = this.users.filter(user => user.id !== userId)
+        this.getAllUsers()
+      })
+    }
 }

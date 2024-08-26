@@ -36,7 +36,7 @@ updatedCount!:number
 
 add() {
 
-this.item.emit({item:this.data,quantity:this.amount})
+this.item.emit({product:this.data,quantity:this.amount})
 }
 
   // Method to handle the "Add to Cart" button click

@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
         }
       },
     });
+   this.getCartCount();
   }
   getCartCount() {
     return this.cartService.getCartCount();
@@ -46,6 +47,8 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     localStorage.removeItem('role');
     localStorage.removeItem('userId');
+    localStorage.removeItem("cart");
+    localStorage.removeItem("cartId")
     this.isAuthenticated = false;
   }
 }

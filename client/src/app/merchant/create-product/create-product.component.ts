@@ -21,12 +21,12 @@ import { response } from 'express';
 })
 export class CreateProductComponent {
   productForm!: FormGroup;
-  userid:number=8
+  userid!:any
 
   constructor(private fb: FormBuilder,private ProductService:ProductserviceService,private router:Router) {}
 
   ngOnInit(): void {
-    
+
     this.productForm = this.fb.group({
       image_url: ['', Validators.required],
       name: ['', Validators.required],
@@ -34,7 +34,7 @@ export class CreateProductComponent {
       description: ['', Validators.required],
       stock_quantity: [0, [Validators.required, Validators.min(0)]]
     });
-    
+
     //this.addProduct();
   }
 
@@ -51,7 +51,7 @@ export class CreateProductComponent {
       });
       // Handle the API call to add the product here
     }
-    
+
   }*/
 
 
@@ -59,6 +59,7 @@ export class CreateProductComponent {
     console.log("4")
     if (this.productForm.valid) {
       const newProduct = this.productForm.value;
+      this.userid = Number( localStorage.getItem("userId"))
       console.log('Product Added:', newProduct);
       this.ProductService.createProduct(this.productForm.value,this.userid).subscribe((response)=>{
         console.log('product added');
@@ -69,8 +70,8 @@ export class CreateProductComponent {
 
 
 
-      // Handle the API call to add the product here
+     
     }
-    
+
   }
 }

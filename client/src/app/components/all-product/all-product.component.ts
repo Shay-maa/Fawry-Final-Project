@@ -44,39 +44,41 @@ export class AllProductComponent {
   }
 
   addToCart(event: any) {
-    let cartId = this.getCartId(); // جلب cartId من الـ localStorage أو توليد واحد جديد
+    let cartId = this.getCartId(); 
 
     if (!cartId) {
-      cartId = this.generateCartId(); // توليد cartId جديد
-      localStorage.setItem('cartId', cartId); // تخزين cartId في localStorage
+      cartId = this.generateCartId(); 
+      localStorage.setItem('cartId', localStorage.getItem('userId')!); 
     }
 
     if ('cart' in localStorage) {
       this.cartProduct = JSON.parse(localStorage.getItem('cart')!);
 
       let exist = this.cartProduct.find(
-        (item: any) => item.item.id == event.item.id
+        (item: any) => item.product.id == event.product.id 
       );
+console.log('item :>> ', this.cartProduct);
+console.log('event :>> ', event);
 
       if (exist) {
         exist.quantity = event.quantity;
         localStorage.setItem('cart', JSON.stringify(this.cartProduct));
-        this.sendToBackend(cartId, event.item.id, exist.quantity);
+        this.sendToBackend(cartId, event.product.id, exist.quantity);
       } else {
         this.cartProduct.push(event);
         localStorage.setItem('cart', JSON.stringify(this.cartProduct));
-        this.sendToBackend(cartId, event.item.id, event.quantity);
+        this.sendToBackend(cartId, event.product.id, event.quantity);
       }
     } else {
       this.cartProduct.push(event);
       localStorage.setItem('cart', JSON.stringify(this.cartProduct));
-      this.sendToBackend(cartId, event.item.id, event.quantity); //
+      this.sendToBackend(cartId, event.product.id, event.quantity); //
     }
   }
 
   sendToBackend(cartId: string, productId: number, quantity: number) {
     this.http
-      .post('http://localhost:8083/shop/cart', { productId, quantity, cartId })
+      .post('http://localhost:8900/shop/cart', { productId, quantity, cartId })
       .subscribe(
         (response) => {
           console.log('تمت إضافة المنتج إلى السلة بنجاح:', response);
@@ -91,7 +93,7 @@ export class AllProductComponent {
     return localStorage.getItem('cartId');
   }
 
-  generateCartId(): string {
-    return Math.random().toString().substr(2, 4);
+  generateCartId() {
+    return localStorage.getItem('userId')!;
   }
 }

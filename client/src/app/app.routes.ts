@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import path from 'path';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsDetailsComponent } from './components/products-details/products-details.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -23,7 +24,6 @@ import { CreateProductComponent } from './merchant/create-product/create-product
 import { SearchCouponComponent } from './merchant/search-coupon/search-coupon.component';
 import { authGuard } from './guard/auth.guard';
 import { OrderComponent } from './components/order/order.component';
-import { CartComponent } from './components/cart/cart.component';
 // import { AdminDashboardComponent } from './components/admin/AdminDashboardComponent';
 // import { CategoriesComponent } from './components/admin/categories/categories.component';
 // import { LoginAdminComponent } from './components/admin/login-admin/login-admin.component';
@@ -40,37 +40,34 @@ import { CartComponent } from './components/cart/cart.component';
 // import { VendorProductsComponent } from './components/vendorDashboard/vendor-products/vendor-products.component';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'details/:id', component: ProductsDetailsComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'searchlist', component: SearchListComponentComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'orders', component: OrderComponent },
+  {path:"home", component:HomeComponent , canActivate: [authGuard] },
+  {path:"details/:id", component:ProductsDetailsComponent},
+  {path:"profile", component:UserProfileComponent},
+  {path:"register",component:RegisterComponent},
+  {path:"cart",component:CartComponent},
+  {path:"payment",component:PaymentComponent},
+  {path:"searchlist",component:SearchListComponentComponent},
+  {path:"login", component:LoginComponent},
+{path:"orders",component:OrderComponent},
 
   // {path:"admin", component:AdminDashboardComponent},
-  {
-    path: 'admin/dashboard',
-    component: AdmindashboardComponent,
-    canActivate: [authGuard],
-  },
-  { path: 'show-admins', component: ShowAdminsComponent },
-  { path: 'create-admins', component: CreateAdminComponent },
-  { path: 'showallusers', component: ShowAllUsersComponent },
-  { path: 'merchents', component: AdmindashboardComponent },
+  {path:"admin/dashboard", component:AdmindashboardComponent , canActivate: [authGuard]},
+  {path:"show-admins", component:ShowAdminsComponent},
+  {path:"create-admins", component:CreateAdminComponent},
+  {path:"showallusers", component:ShowAllUsersComponent},
+  {path:"merchents", component:AdmindashboardComponent},
 
-  {
-    path: 'merchent-dashboard',
-    component: MerchantDashboardComponent,
-    canActivate: [authGuard],
-  },
-  { path: 'merchent-products', component: MerchantProductsComponent },
-  { path: 'merchent-sidebar', component: MerchantSidebarComponent },
-  { path: 'search-coupones', component: SearchCouponComponent },
-  { path: 'create-coupon', component: CreateCouponModelComponent },
-  { path: 'create-product', component: CreateProductComponent },
 
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+
+  {path:"merchent-dashboard", component:MerchantDashboardComponent , canActivate: [authGuard]},
+  {path:"merchent-products", component:MerchantProductsComponent},
+  {path:"merchent-sidebar", component:MerchantSidebarComponent},
+  {path:"search-coupones", component:SearchCouponComponent},
+  {path:"create-coupon", component:CreateCouponModelComponent},
+  {path:"create-product", component:CreateProductComponent},
+
+
+
+    {path:"**",redirectTo:"home",pathMatch:"full"},
+
 ];

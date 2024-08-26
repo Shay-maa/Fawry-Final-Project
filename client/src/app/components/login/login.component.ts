@@ -74,7 +74,7 @@ export class LoginComponent {
               this._Router.navigate(['/merchent-dashboard']);
               break;
             default:
-              // Handle unknown role or show an error
+             
               this.error = 'Unknown role';
               break;
           }
@@ -91,12 +91,7 @@ export class LoginComponent {
 
 
     });
-    // const formdata = new FormData();
 
-    // formdata.append('email', this.loginform.get('email')?.value);
-    // formdata.append('password', this.loginform.get('password')?.value);
   }
 }
 
-// this is fixed for the vendor login for now
-// need to adjust it after we get the user login and registration apis

@@ -20,7 +20,7 @@
         <td>{{ merchant.email }}</td>
         <td>{{ merchant.phone_number }}</td>
         <td>
-          <button class="btn btn-danger me-2">Delete</button>
+          <button class="btn btn-danger me-2" (click)="deletMerchant(merchant.id)" >Delete</button>
 
         </td>
       </tr>

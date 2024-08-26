@@ -31,14 +31,14 @@ export class PaymentComponent {
     this.checkoutForm = this.fb.group({
       cardNumber: ['', Validators.required],
       cvv: ['', Validators.required],
-      coupon: ['', Validators.required],
+      coupon: [null],
     });
   }
 
   onSubmit() {
     if (this.checkoutForm.valid) {
       const cartId = localStorage.getItem('cartId');
-      const token = localStorage.getItem('token')!;
+      const token = localStorage.getItem('auth-token')!;
       const userId = localStorage.getItem('userId');
       if (cartId) {
         const paymentData = {

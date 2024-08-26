@@ -16,20 +16,20 @@ import { MerchantSidebarComponent } from "../merchant-sidebar/merchant-sidebar.c
   styleUrl: './search-coupon.component.css'
 })
 export class SearchCouponComponent {
-  couponId: string = '';
+  couponCode: string = '';
   couponDetails: any;
   errorMessage: string = '';
 
   constructor(private couponService: CouponService) {}
 
-  // Search for coupon by ID
+  // Search for coupon by Code
   searchCoupon() {
-    this.couponService.getCouponById(this.couponId).subscribe(
-      (data:any) => {
+    this.couponService.getCouponByCode(this.couponCode).subscribe(
+      (data: any) => {
         this.couponDetails = data;
         this.errorMessage = '';
       },
-      (error:any) => {
+      (error: any) => {
         this.couponDetails = null;
         this.errorMessage = 'Coupon not found!';
       }
@@ -39,17 +39,16 @@ export class SearchCouponComponent {
   // Delete the coupon
   deleteCoupon() {
     if (confirm('Are you sure you want to delete this coupon?')) {
-      this.couponService.deleteCoupon(this.couponId).subscribe(
+      this.couponService.deleteCoupon(this.couponCode).subscribe(
         () => {
           alert('Coupon deleted successfully.');
           this.couponDetails = null;
-          this.couponId = '';
+          this.couponCode = '';
         },
-        (error:any) => {
+        (error: any) => {
           alert('Failed to delete the coupon.');
         }
       );
     }
   }
-
 }

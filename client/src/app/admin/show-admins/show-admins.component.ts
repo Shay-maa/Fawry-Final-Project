@@ -19,17 +19,14 @@ import { AdminService } from '../service/admin.service';
 })
 export class ShowAdminsComponent implements OnInit{
 
-  
-changeRole() {
-throw new Error('Method not implemented.');
-}
+
+
   constructor(private router:Router,private adminService:AdminService){}
   ngOnInit(): void {
       this.getAllAdmins()
   }
-
-  selectedRole:  string = 'admin';
-  selectedUser: any;
+  selectedRole: string = 'admin';
+  userIdToChangeRole: string = '';
 
   admins: any[] = [];
 
@@ -60,7 +57,26 @@ deleteAdmin(adminId:string){
   );
 }
 
-
+// Method to open the modal and set user ID
+openChangeRoleModal(userId: string): void {
+  this.userIdToChangeRole = userId;
 
 }
+
+// Method to change user role
+changeRole(): void {
+  if (this.userIdToChangeRole && this.selectedRole) {
+    this.adminService.changeRole(this.userIdToChangeRole, this.selectedRole).subscribe(() => {
+      alert('Role changed successfully!');
+    
+    }, error => {
+      alert('Error changing role!');
+      console.error(error);
+    });
+  }
+}
+}
+
+
+
 

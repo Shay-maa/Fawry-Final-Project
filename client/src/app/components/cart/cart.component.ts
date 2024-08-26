@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from "../../shared/components/navbar/navbar.component";
 import { FooterComponent } from "../../shared/components/footer/footer/footer.component";
+import {HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -28,18 +29,38 @@ export class CartComponent {
   total: number = 0;
   success: boolean = false;
   
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router,     private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getCartProduct();
   }
   // get data from localstorage
-  getCartProduct() {
-    if ('cart' in localStorage) {
-      this.cartProduct = JSON.parse(localStorage.getItem('cart')!);
-      console.log(this.cartProduct);
-    }
-    this.getTotalProducts();
+  // getCartProduct() {
+  //   if ('cart' in localStorage) {
+  //     this.cartProduct = JSON.parse(localStorage.getItem('cart')!);
+  //     console.log(this.cartProduct);
+  //   }
+  //   this.getTotalProducts();
+  // }
+    getCartProduct() {
+    const cartId = localStorage.getItem('userId')!;
+    const headers = new HttpHeaders({
+      cartid: cartId,
+    });
+    this.http
+      .get<any[]>('http://localhost:8900/shop/cart',{headers})
+      .subscribe(
+        (response) => {
+          this.cartProduct = response;
+          console.log('this.cartProduct :>> ', this.cartProduct);
+           localStorage.setItem('cart',JSON.stringify(this.cartProduct));
+          console.log(this.cartProduct);
+          this.getTotalProducts();
+        },
+        (error) => {
+          console.error('Error fetching cart data:', error);
+        }
+      );
   }
   detectChange() {
     this.getTotalProducts();
@@ -47,9 +68,9 @@ export class CartComponent {
   }
 
   deleteProduct(index: number) {
-    const productId = this.cartProduct[index].item.id;
-    console.log('cartProduct[index] :>> ', this.cartProduct[index].item.id);
-    const cartId = localStorage.getItem("cartId")!;
+    const productId = this.cartProduct[index].product.id;
+    console.log('cartProduct[index] :>> ', this.cartProduct[index].product.id);
+    const cartId = localStorage.getItem("userId")!;
     this.cartService.removeProductFromCart(productId, cartId).subscribe(
       () => {
         this.cartProduct.splice(index, 1);
@@ -74,15 +95,15 @@ export class CartComponent {
 
   // Send Cart Data To Backend
   addCartToBackend() {
-    let products = this.cartProduct.map((item) => {
-      return { productId: item.item.id, quantity: item.quantity };
-    });
+    // let products = this.cartProduct.map((item) => {
+    //   return { productId: item.item.id, quantity: item.quantity };
+    // });
 
-    let model = {
-      userId: 5,
-      date: new Date(),
-      products: products,
-    };
+    // let model = {
+    //   userId: 5,
+    //   date: new Date(),
+    //   products: products,
+    // };
 
     this.router.navigate(['/payment']);
   }
@@ -91,7 +112,7 @@ export class CartComponent {
     this.total = 0;
     for (let x in this.cartProduct) {
       this.total +=
-        this.cartProduct[x].item.price * this.cartProduct[x].quantity;
+        this.cartProduct[x].product.price * this.cartProduct[x].quantity;
     }
   }
 

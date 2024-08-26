@@ -9,7 +9,7 @@ import { response } from 'express';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8900/users/auth';
-  private tokenKey = 'token';
+  private tokenKey = 'auth-token';
   userId!:string;
   role!:string;
   user: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);

@@ -34,10 +34,9 @@
         <td>{{ admin.deletedAt }}</td>
         <td>
           <button class="btn btn-danger me-2" (click)="deleteAdmin(admin.userId)">Delete</button>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCardModal">
-              Change Role
-
-            </button>
+          <button type="button" class="btn btn-success" (click)="openChangeRoleModal(admin.id)">
+            Change Role
+          </button>
 
         </td>
       </tr>
@@ -69,7 +68,7 @@
           <div class="mb-3">
             <label for="roleSelect" class="form-label">Select Role</label>
             <select id="roleSelect" class="form-select" [(ngModel)]="selectedRole" [ngModelOptions]="{standalone: true}">
-              <option value="admin"selected>Admin</option>
+              <option value="admin" selected>Admin</option>
               <option value="user">User</option>
               <option value="merchant">Merchant</option>
             </select>

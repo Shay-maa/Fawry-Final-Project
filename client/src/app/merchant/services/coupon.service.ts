@@ -7,27 +7,29 @@ import { Coupon } from '../interfac/coupon';
   providedIn: 'root'
 })
 export class CouponService {
-  private apiUrl = 'https://your-api-endpoint.com/coupons'; // Replace with your API endpoint
+  private apiUrl = 'http://localhost:8080/coupons'; // Replace with your API endpoint
 
   constructor(private http: HttpClient) {}
 
   addCoupon(coupon: Coupon): Observable<Coupon> {
-    return this.http.post<Coupon>(this.apiUrl, coupon);
+    return this.http.post<Coupon>( `${this.apiUrl}/add`, coupon);
   }
+ 
+  
 
   getCoupons(): Observable<Coupon[]> {
     return this.http.get<Coupon[]>(this.apiUrl);
   }
 
   // Get coupon by ID
-  getCouponById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`);
+  getCouponByCode(code: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${code}`);
   }
 
   // Delete coupon by ID
-  deleteCoupon(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
-  }
+  deleteCoupon(code: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${code}`);
+  } 
 
 
   updateCoupon(id: number, coupon: any): Observable<any> {

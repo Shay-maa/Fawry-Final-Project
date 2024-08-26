@@ -17,9 +17,20 @@ import { MerchantSidebarComponent } from "../merchant-sidebar/merchant-sidebar.c
   styleUrl: './create-coupon-model.component.css'
 })
 export class CreateCouponModelComponent {
-addCoupon() {
-throw new Error('Method not implemented.');
-}
+  addCoupon() {
+    if (this.couponForm.valid) {
+      this.couponService.addCoupon(this.couponForm.value).subscribe(
+        response => {
+          console.log('Coupon added successfully', response);
+        },
+        error => {
+          
+          console.error('Error adding coupon', error);
+        }
+      );
+    }
+  }
+  
   coupons = [
     { code: 'SAVE20', usageCount: 10, expireDate: '2024-12-31', fxidValue: 123, percentageValue: 20 },
     { code: 'HOLIDAY50', usageCount: 5, expireDate: '2024-11-30', fxidValue: 456, percentageValue: 50 },
@@ -42,10 +53,10 @@ throw new Error('Method not implemented.');
     this.couponForm = this.fb.group({
       code: ['', Validators.required],
       usageCount: [0, [Validators.required, Validators.min(1)]],
-      expireDate: [null, Validators.required],
-     
-      percentageValue: [0, Validators.required],
-      percentageType: ['', Validators.required]
+      maxUsages: [0, [Validators.required, Validators.min(1)]],
+      expiryDate: ['', Validators.required],
+      value: [0, Validators.required],
+      valueType: ['', Validators.required]
     });
   }
 }
