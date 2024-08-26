@@ -30,8 +30,7 @@ public class ProductServiceImp implements ProductService{
     public ProductDto addProduct(ProductDto productDto) {
         Product product=productMapper.toProduct(productDto);
         productRepo.save(product);
-
-        return productDto;
+        return productMapper.toProductDto(product);
     }
 
     @Override
@@ -41,14 +40,12 @@ public class ProductServiceImp implements ProductService{
         productRepo.save(product);
         return productMapper.toProductDto(product);
     }
-
     @Override
     public ProductDto getProductbyid(long id) {
         Product product=productRepo.findById(id).get();
         ProductDto productDto=productMapper.toProductDto(product);
         return productDto;
     }
-
 
     @Override
     public ProductDto getProductbyidforuser(long id, Long userid) {
@@ -68,8 +65,6 @@ public class ProductServiceImp implements ProductService{
         if (!productRepo.findById(id).isPresent()){
             return false;
         }
-
-
         return true;
     }
 

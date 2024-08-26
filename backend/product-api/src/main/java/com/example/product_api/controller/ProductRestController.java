@@ -35,33 +35,22 @@ public class ProductRestController {
   @GetMapping("/{id}")
   public ResponseEntity <ProductDto> getProduct(@PathVariable("id") int id){
 
-
-
     return new ResponseEntity<>(productService.getProductbyid(id),HttpStatus.OK) ;
   }
 
   @GetMapping("/{userid}/{productid}")
   public ResponseEntity <ProductDto> getProduct(@PathVariable("userid") Long userid,@PathVariable("productid") int productid){
-
-
-
     return new ResponseEntity<>(productService.getProductbyidforuser(productid,userid),HttpStatus.OK) ;
   }
 
   @GetMapping("/getproductbyname/{name}")
   public ResponseEntity <List<ProductDto>> getProductbyname(@PathVariable("name") String name){
 
-    //List<Product> products=productRepo.findByName(name);
-    //productRepo.findById(product.getId()).orElseThrow(()->new NoSuchElementException("no product with this name"));
-    //System.out.println(productRepo.findByName(name));
     return new ResponseEntity<>(productService.findProductByname(name),HttpStatus.OK);
   }
-
   @GetMapping("/{id}/isavailable")
   public ResponseEntity <Boolean> isavailable(@PathVariable("id") int id){
-
     return new ResponseEntity<>(productService.isAvailable(id),HttpStatus.OK);
-
   }
 
   @PostMapping("")
@@ -69,19 +58,17 @@ public class ProductRestController {
    ProductDto theproductdto= productService.addProduct(productdto);
     return new ResponseEntity<>(theproductdto,HttpStatus.OK);
   }
-
   @PostMapping("addproduct/{userid}")
   public ResponseEntity <ProductDto> createProduct(@RequestBody ProductDto productdto,@PathVariable Long userid){
     ProductDto theproductdto= productService.addProductforuser(productdto,userid);
     return new ResponseEntity<>(theproductdto,HttpStatus.OK);
   }
 
-
-  @PutMapping("")
-  public ResponseEntity <ProductDto> updateProduct(@RequestBody ProductDto productdto){
-
-    return new ResponseEntity<>(productService.updateProduct(productdto),HttpStatus.OK);
-  }
+//  @PutMapping("")
+//  public ResponseEntity <ProductDto> updateProduct(@RequestBody ProductDto productdto){
+//
+//    return new ResponseEntity<>(productService.updateProduct(productdto),HttpStatus.OK);
+//  }
 
   @DeleteMapping("/{id}")
   public ResponseEntity <String> deleteProduct(@PathVariable("id") int id){
@@ -94,6 +81,5 @@ public class ProductRestController {
 
     return new ResponseEntity<>(productService.updateProducts(productdto,id),HttpStatus.OK);
   }
-
 
 }

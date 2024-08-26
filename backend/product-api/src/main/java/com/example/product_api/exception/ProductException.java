@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class ProductException {
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)//400
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleInvalidMessages(MethodArgumentNotValidException ex) {
         Map<String, String> mapError = new HashMap<>();
@@ -26,7 +26,7 @@ public class ProductException {
         return mapError;
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)//400
     @ExceptionHandler(Exception.class)
     public ApiException handleMyMethods(Exception exception, WebRequest request) {
         return new ApiException(exception.getMessage(), new Date(), request.toString());
