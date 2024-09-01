@@ -7,7 +7,7 @@ A scalable e-commerce platform built using Spring Boot and Angular, leveraging m
 
 This project is an e-commerce platform developed using Spring Boot for backend services and Angular for the frontend. It is designed with a microservices architecture, where each service communicates with others using Feign Client and publishes messages through RabbitMQ. The application uses Redis for caching cart data and MySQL as the main database.
 
-<!--![Architecture Diagram](./Microservices Diagram.jpgg)-->
+![Architecture Diagram](Microservices%20Diagram.jpg)
 
 
 ## **Key Features**
